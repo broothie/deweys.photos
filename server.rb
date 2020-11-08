@@ -128,7 +128,7 @@ helpers do
   end
 
   def redirect_to_callback
-    redirect session.fetch(:callback, '/')
+    redirect session.delete(:callback) || '/'
   end
 
   # GCP
