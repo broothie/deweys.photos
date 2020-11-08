@@ -2,14 +2,14 @@ require 'dotenv/load'
 require 'sinatra'
 require 'sinatra/flash'
 require 'sinatra/reloader' if development?
-require 'sass'
+require 'sassc'
 require 'google/cloud/firestore'
 require 'google/cloud/storage'
 
 enable :sessions
 
 get '/' do
-  @entries = entries.get.sort_by(&:created_at).reverse
+  @entries = all_entries
   title 'Home'
   erb :index
 end
@@ -17,7 +17,7 @@ end
 get '/photos/manage' do
   require_logged_in!
 
-  @entries = entries.get.sort_by(&:created_at).reverse
+  @entries = all_entries
   title 'Manage Photos'
   erb :manage_photos
 end
@@ -127,6 +127,10 @@ helpers do
   end
 
   # GCP
+  def all_entries
+    entries.get.sort_by(&:created_at).reverse
+  end
+
   def entries
     @entries ||= Google::Cloud::Firestore
       .new(**gcp_args)
