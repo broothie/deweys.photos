@@ -1,0 +1,33 @@
+{{ template "base" . }}
+
+{{ define "title" }} Home {{ end }}
+
+{{ define "main" }}
+    <div class="index">
+        <div class="sidebar">
+            <div class="nav">
+                <h2>Dewey's Photos</h2>
+
+                <div class="entry-links">
+                    {{ range $entry := .Entries }}
+                        <a href="#photo-{{ $entry.ID }}">{{ $entry.Title }}</a>
+                    {{ end }}
+                </div>
+            </div>
+
+            <a href="/photos/manage">
+                <button>Manage Photos</button>
+            </a>
+        </div>
+
+        <div class="photos">
+            {{ range $entry := .Entries }}
+                <div id="photo-{{ $entry.ID }}" class="photo">
+                    <h2>{{ $entry.Title }}</h2>
+                    <img src="{{ $entry.URL }}" alt="{{ $entry.Title }}"/>
+                    <p>{{ $entry.Blurb }}</p>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

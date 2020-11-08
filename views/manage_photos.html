@@ -1,0 +1,41 @@
+{{ template "base" . }}
+
+{{ define "title" }} Upload {{ end }}
+
+{{ define "main" }}
+    <div>
+        <header>
+            <a href="/"><button>Go Back</button></a>
+            <button onclick="logOut()">Log Out</button>
+        </header>
+
+        <div class="manage-photos">
+            <div class="manage-photos-container">
+                <div class="add-photo half">
+                    <h2>Add Photo</h2>
+                    <div class="photo-form">
+                        <form id="photo-form" method="post" action="/photos" enctype="multipart/form-data">
+                            <input type="text" name="title" value="{{ .Entry.Title }}" placeholder="Title this photo" required/>
+                            <input type="text" name="blurb" value="{{ .Entry.Blurb }}" placeholder="Write something about this photo..." required/>
+                            <input type="file" name="photo" required/>
+                        </form>
+
+                        <div class="submit">
+                            <input class="primary" type="submit" form="photo-form"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-photos half">
+                    <h2>Edit Photo Details</h2>
+
+                    <div class="entry-links">
+                        {{ range $entry := .Entries }}
+                            <a href="/photos/{{ $entry.ID }}">{{ $entry.Title }}</a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ end }}

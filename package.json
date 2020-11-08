@@ -1,0 +1,17 @@
+{
+  "name": "deweys.photos",
+  "version": "1.0.0",
+  "main": "frontend/base.scss",
+  "author": "broothie <adbooth8@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "watch": "parcel watch frontend/* -d public --public-url /public",
+    "build": "parcel build frontend/* -d public --public-url /public --no-source-maps"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "devDependencies": {
+    "sass": "^1.29.0"
+  }
+}
