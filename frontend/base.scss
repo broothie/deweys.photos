@@ -1,0 +1,61 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+input {
+  margin: 10px;
+  cursor: pointer;
+}
+
+input[type=text], input[type=password] {
+  border-bottom: 1px solid lightgray;
+  padding: 5px 10px;
+
+  &:hover {
+    border-bottom: 1px dashed black;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid black;
+  }
+}
+
+button, input[type=submit] {
+  width: fit-content;
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid gray;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid black;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+  }
+
+  &.primary {
+    font-weight: bold;
+  }
+}
+
+@import "scss/index";
+@import "scss/login";
+@import "scss/manage_photos";
+@import "scss/edit_photo";

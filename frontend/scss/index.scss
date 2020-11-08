@@ -1,0 +1,47 @@
+
+.index {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  height: 100%;
+
+  .sidebar {
+    padding: 30px;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    .entry-links {
+      display: flex;
+      flex-flow: column;
+
+      a {
+        margin: 3px 15px;
+      }
+    }
+  }
+
+  .photos {
+    overflow-y: scroll;
+    flex-basis: auto;
+    align-self: flex-start;
+    height: 100%;
+
+    .photo {
+      height: 100vh;
+      width: fit-content;
+      margin-bottom: 20vh;
+
+      h2 {
+        margin-top: 20px;
+      }
+
+      img {
+        width: auto;
+        height: 85%;
+        margin: 20px 0;
+      }
+    }
+  }
+}

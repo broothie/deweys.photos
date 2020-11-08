@@ -1,0 +1,22 @@
+{{ template "base" . }}
+
+{{ define "title" }} Edit Photo {{ end }}
+
+{{ define "main" }}
+    <div class="edit-photo">
+        <div class="edit-photo-container">
+            <h2>Edit Photo Details</h2>
+            <div class="photo-form">
+                <form id="photo-form" method="post" action="/photos/{{ .Entry.ID }}">
+                    <input type="text" name="title" value="{{ .Entry.Title }}" placeholder="Title this photo" required/>
+                    <input type="text" name="blurb" value="{{ .Entry.Blurb }}" placeholder="Write something about this photo..." required/>
+                </form>
+
+                <div class="submit">
+                    <input class="primary" type="submit" form="photo-form"/>
+                    <a href="/photos/manage"><button>Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ end }}
