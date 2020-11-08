@@ -1,0 +1,13 @@
+<div class="login">
+  <h2>Log In</h2>
+
+  <form id="login" action="/login" method="post">
+    <input type="password" name="password" placeholder="Password" autofocus/>
+  </form>
+
+  <div class="submit">
+    <p class="error"><%= flash[:error] %></p>
+    <input class="primary" type="submit" form="login"/>
+    <a href="/"><button>Cancel</button></a>
+  </div>
+</div>

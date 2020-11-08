@@ -1,0 +1,27 @@
+<div class="index">
+  <div class="sidebar">
+    <div class="nav">
+      <h2>Dewey's Photos</h2>
+
+      <div class="entry-links">
+        <% @entries.each do |entry| %>
+          <a href="#photo-<%= entry.document_id %>"><%= entry[:title] %></a>
+        <% end %>
+      </div>
+    </div>
+
+    <a href="/photos/manage">
+      <button>Manage Photos</button>
+    </a>
+  </div>
+
+  <div class="photos">
+    <% @entries.each do |entry| %>
+      <div id="photo-<%= entry.document_id %>" class="photo">
+        <h2><%= entry[:title] %></h2>
+        <img src="<%= entry[:url] %>" alt="<%= entry[:title] %>">
+        <p><%= entry[:blurb] %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
