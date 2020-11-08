@@ -7,6 +7,11 @@ require 'google/cloud/firestore'
 require 'google/cloud/storage'
 
 enable :sessions
+set session_secret: ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+
+not_found do
+  redirect '/'
+end
 
 get '/' do
   @entries = all_entries
@@ -14,7 +19,7 @@ get '/' do
   erb :index
 end
 
-get '/photos/manage' do
+get '/manage' do
   require_logged_in!
 
   @entries = all_entries
@@ -73,7 +78,7 @@ end
 
 post '/login' do
   if password_correct?(params[:password])
-    session[:logged_in] = true
+    log_in!
     redirect_to_callback
   else
     flash[:error] = 'Incorrect password'
