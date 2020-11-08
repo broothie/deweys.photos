@@ -24,7 +24,7 @@ get '/manage' do
 
   @entries = all_entries
   title 'Manage Photos'
-  erb :manage_photos
+  erb :manage
 end
 
 post '/photos' do
