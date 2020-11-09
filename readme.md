@@ -3,7 +3,7 @@
 ## Todo
 
 - [x] ~~Allow photo overwrite~~
-- [ ] Fix horizontal scroll on large images
+- [x] ~~Fix horizontal scroll on large images~~
 - [ ] Add upload progress bar
 - [x] ~~Rename edit_photo.erb~~
 - [x] ~~Fix link spacing~~

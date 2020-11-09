@@ -37,6 +37,7 @@
     .photo {
       height: 100vh;
       width: fit-content;
+      padding-top: 20px;
       margin-bottom: 20vh;
 
       h2 {
@@ -45,8 +46,10 @@
 
       img {
         width: auto;
-        height: 85%;
-        margin: 20px 0;
+        height: auto;
+        max-width: 100%;
+        max-height: 85%;
+        margin: 20px 5px 10px 0;
       }
     }
   }
