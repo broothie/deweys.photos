@@ -13,6 +13,10 @@ html, body {
   font-family: sans-serif;
 }
 
+.hidden {
+  display: none;
+}
+
 input {
   margin: 10px;
   cursor: pointer;
@@ -57,5 +61,5 @@ button, input[type=submit] {
 
 @import "scss/index";
 @import "scss/login";
-@import "scss/manage_photos";
-@import "scss/edit_photo";
+@import "scss/manage";
+@import "scss/edit";

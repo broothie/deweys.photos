@@ -1,11 +1,11 @@
-<div>
+<div class="manage-photos-page">
   <header>
     <a href="/"><button>Go Back</button></a>
     <button onclick="logOut()">Log Out</button>
   </header>
 
-  <div class="manage-photos">
-    <div class="manage-photos-container">
+  <main>
+    <div class="manage-photos">
       <div class="add-photo half">
         <h2>Add Photo</h2>
         <div class="photo-form">
@@ -31,9 +31,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </div>
 
-<script>
-  window.logOut = () => fetch('/login', { method: 'delete' }).then(() => location.href = '/');
+<script type="text/javascript" charset="utf-8">
+  logOut = () => fetch('/login', {method: 'delete'}).then(() => location.href = '/')
 </script>

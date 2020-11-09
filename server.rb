@@ -55,16 +55,27 @@ get '/photos/:entry_id' do |entry_id|
 
   @entry = entries.doc(entry_id).get
   title 'Edit Photo'
-  erb :edit_photo
+  erb :edit
 end
 
+require 'json'
 post '/photos/:entry_id' do |entry_id|
   require_logged_in!
 
-  entries.doc(entry_id).update({
+  photo_info = {}
+  if photo = params[:photo]
+    filename = photo[:filename]
+    local_file = photo[:tempfile]
+
+    cloud_file = bucket.create_file(local_file, filename)
+    photo_info[:filename] = filename
+    photo_info[:url] = cloud_file.public_url
+  end
+
+  entries.doc(entry_id).update(photo_info.merge(
     title: params[:title],
     blurb: params[:blurb]
-  })
+  ))
 
   redirect "/#photos-#{entry_id}"
 end

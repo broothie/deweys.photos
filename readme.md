@@ -2,11 +2,12 @@
 
 ## Todo
 
+- [x] ~~Allow photo overwrite~~
 - [ ] Fix horizontal scroll on large images
 - [ ] Add upload progress bar
-- [ ] Rename edit_photo.erb
-- [ ] Fix link spacing
+- [x] ~~Rename edit_photo.erb~~
+- [x] ~~Fix link spacing~~
 - [ ] Fix anchor spacing
-- [ ] Fix buttons on manage page
+- [x] ~~Fix buttons on manage page~~
 - [ ] Improve mobile site
 - [ ] Add lightbox?

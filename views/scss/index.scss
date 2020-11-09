@@ -12,12 +12,18 @@
     flex-flow: column;
     justify-content: space-between;
 
-    .entry-links {
-      display: flex;
-      flex-flow: column;
+    .nav {
+      h2 {
+        margin-bottom: 20px;
+      }
 
-      a {
-        margin: 3px 15px;
+      .entry-links {
+        display: flex;
+        flex-flow: column;
+
+        a {
+          margin: 5px 15px;
+        }
       }
     }
   }
