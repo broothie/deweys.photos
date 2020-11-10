@@ -2,6 +2,7 @@
 
 ## Todo
 
+- [ ] Add drag'n'drop for file upload
 - [x] ~~Allow photo overwrite~~
 - [x] ~~Fix horizontal scroll on large images~~
 - [ ] Add upload progress bar
