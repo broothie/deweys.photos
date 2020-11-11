@@ -12,24 +12,24 @@
     flex-flow: column;
     width: 20vw;
 
-    .photo-form {
-      form {
+    .photo-form-container {
+      .form {
         display: flex;
         flex-flow: column;
 
-        .progress-bar {
-          width: 100%;
-          height: 20px;
-
-          border: 1px solid black;
-
-          .progress-bar-filler {
-            width: 0;
-            height: 100%;
-            background-color: black;
-            color: white;
-          }
-        }
+        //.progress-bar {
+        //  width: 100%;
+        //  height: 20px;
+        //
+        //  border: 1px solid black;
+        //
+        //  .progress-bar-filler {
+        //    width: 0;
+        //    height: 100%;
+        //    background-color: black;
+        //    color: white;
+        //  }
+        //}
       }
     }
 

@@ -2,27 +2,42 @@
   <div class="edit-photo-container">
     <h2>Edit Photo Details</h2>
 
-    <div class="photo-form">
-      <form id="photo-form" method="post" action="/photos/<%= @entry.document_id %>" enctype="multipart/form-data">
+    <div class="photo-form-container">
+      <form id="photo-form" class="form">
         <input type="text" name="title" value="<%= @entry[:title] %>" placeholder="Title this photo" required/>
         <input type="text" name="blurb" value="<%= @entry[:blurb] %>" placeholder="Write something about this photo..."/>
-        <input type="file" name="photo"/>
+
+        <div id="file-dropper" class="file-dropper">
+          <p>drag a file here to update</p>
+        </div>
+
+        <% if false %>
         <div id="progress-bar" class="progress-bar hidden">
           <div id="progress-bar-filler" class="progress-bar-filler"></div>
         </div>
+        <% end %>
       </form>
 
       <div class="submit">
-<!--        <button class="primary" onclick="submit()">Submit</button>-->
-        <input type="submit" class="primary" form="photo-form"/>
+        <button id="submit" class="primary">Submit</button>
         <a href="/manage"><button>Cancel</button></a>
       </div>
     </div>
   </div>
 </div>
 
+<script src="/photo_form.js"></script>
+<script type="text/javascript" charset="utf-8">
+  document.addEventListener('DOMContentLoaded', () => {
+    photoFormSetup(
+      '/photos/<%= @entry.document_id %>',
+      () => location.href = '/#photo-<%= @entry.document_id %>',
+      console.log
+    );
+  });
+</script>
+
 <% if false %>
-<%# TODO %>
 <script type="text/javascript" charset="utf-8">
   submit = () => {
     const form = document.forms.namedItem('photo-form');
@@ -30,23 +45,22 @@
     const formData = new FormData(form);
     const request = new XMLHttpRequest();
 
-    <%# if false %>
     const progressBar = document.getElementById('progress-bar');
     const progressBarWidth = progressBar.clientWidth;
     const progressBarFiller = document.getElementById('progress-bar-filler');
-    request.onprogress = (event) => {
+
+    request.upload.addEventListener('progress', (event) => {
       const ratio = event.loaded / event.total;
       console.log(ratio);
       progressBarFiller.style.width = `${ratio * progressBarWidth}px`;
       progressBarFiller.innerText = `${ratio * 100}%`;
-    };
-
+    });
+    //
     if (form.elements['photo'].value) {
       progressBarFiller.innerText = '0%';
       progressBar.classList.remove('hidden');
     }
-    <%# end %>
-
+    //
     request.onreadystatechange = () => {
       if (request.readyState === XMLHttpRequest.DONE) location.href = '/';
     };

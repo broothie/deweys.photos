@@ -1,7 +1,7 @@
 <div class="manage-photos-page">
   <header>
     <a href="/"><button>Go Back</button></a>
-    <button onclick="logOut()">Log Out</button>
+    <button id="logout">Log Out</button>
   </header>
 
   <main>
@@ -9,14 +9,19 @@
       <div class="add-photo half">
         <h2>Add Photo</h2>
         <div class="photo-form">
-          <form id="photo-form" method="post" action="/photos" enctype="multipart/form-data">
+          <form class="form" id="photo-form">
             <input type="text" name="title" placeholder="Title this photo" required/>
             <input type="text" name="blurb" placeholder="Write something about this photo..."/>
-            <input type="file" name="photo" required/>
+
+            <div id="file-dropper" class="file-dropper">
+              <p>drag a file here to add</p>
+            </div>
+
+            <div id="error" class="error"></div>
           </form>
 
           <div class="submit">
-            <input class="primary" type="submit" form="photo-form"/>
+            <button id="submit" class="primary" >Submit</button>
           </div>
         </div>
       </div>
@@ -34,6 +39,20 @@
   </main>
 </div>
 
+<script src="/photo_form.js"></script>
 <script type="text/javascript" charset="utf-8">
-  logOut = () => fetch('/login', {method: 'delete'}).then(() => location.href = '/')
+  document.addEventListener('DOMContentLoaded', () => {
+    const logOut = document.getElementById('logout');
+    logOut.addEventListener('click', (event) => {
+      event.preventDefault();
+      fetch('/login', { method: 'delete' }).then(() => location.href = '/');
+    });
+
+    const error = document.getElementById('error');
+    photoFormSetup(
+      '/photos',
+      () => location.href = '/',
+      (res) => res.json().then((json) => error.innerText = json['error'])
+    );
+  });
 </script>

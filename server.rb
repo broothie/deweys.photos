@@ -5,6 +5,7 @@ require 'sinatra/reloader' if development?
 require 'sassc'
 require 'google/cloud/firestore'
 require 'google/cloud/storage'
+require 'json'
 
 enable :sessions
 set session_secret: ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
@@ -29,6 +30,13 @@ end
 
 post '/photos' do
   require_logged_in!
+
+  # Validate fields
+  [:title, :photo].each do |field|
+    if params[field].nil? || params[field].empty?
+      halt 400, { error: "please add a #{field}" }.to_json
+    end
+  end
 
   # Get uploaded photo data
   photo = params[:photo]
@@ -58,12 +66,12 @@ get '/photos/:entry_id' do |entry_id|
   erb :edit
 end
 
-require 'json'
 post '/photos/:entry_id' do |entry_id|
   require_logged_in!
 
   photo_info = {}
-  if photo = params[:photo]
+  if params[:photo]
+    photo = params[:photo]
     filename = photo[:filename]
     local_file = photo[:tempfile]
 

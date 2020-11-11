@@ -32,15 +32,20 @@
 
       .add-photo {
         .photo-form {
-          form {
+          .form {
             display: flex;
             flex-flow: column;
+
+            .error {
+              color: red;
+            }
           }
 
           .submit {
             display: flex;
             flex-flow: row;
             align-items: center;
+            padding: 10px;
           }
         }
       }
