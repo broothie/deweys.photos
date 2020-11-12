@@ -2,17 +2,17 @@ require 'dotenv/load'
 require 'sinatra'
 require 'sinatra/flash'
 require 'sinatra/reloader' if development?
+require 'json'
 require 'sassc'
 require 'google/cloud/firestore'
 require 'google/cloud/storage'
-require 'json'
 
 enable :sessions
 set session_secret: ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
 
-not_found do
-  redirect '/'
-end
+before(/.*\.js/) { content_type 'application/javascript' }
+not_found { redirect '/' }
+get('/style.css') { scss :base }
 
 get '/' do
   @entries = all_entries
@@ -106,32 +106,16 @@ post '/login' do
 end
 
 delete '/login' do
+  require_logged_in!
   log_out!
-end
-
-get '/style.css' do
-  scss :base
 end
 
 helpers do
   # Shorthands
   def json(*args)
-    status = 200
-    headers = {}
-    case args.length
-    when 1
-      body = args.first
-    when 2
-      status, body = args
-    when 3
-      status, headers, body = args
-    else
-      # Let halt raise whatever error it normally would with the wrong number of args
-      return halt(*args)
-    end
-
-    headers.merge!('Content-Type' => 'application/json')
-    halt status, headers, body.to_json
+    args[-1] = args[-1].to_json
+    content_type 'application/json'
+    halt *args
   end
 
   def title(title)
