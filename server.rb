@@ -10,9 +10,7 @@ require 'google/cloud/storage'
 enable :sessions
 set session_secret: ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
 
-before(/.*\.js/) { content_type 'application/javascript' }
-not_found { redirect '/' }
-get('/style.css') { scss :base }
+# before(/.*\.js/) { content_type 'application/javascript' }
 
 get '/' do
   @entries = all_entries
@@ -108,6 +106,10 @@ end
 delete '/login' do
   require_logged_in!
   log_out!
+end
+
+get '/style.css' do
+  scss :base
 end
 
 helpers do
