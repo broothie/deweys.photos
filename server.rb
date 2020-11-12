@@ -10,7 +10,7 @@ require 'google/cloud/storage'
 enable :sessions
 set session_secret: ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
 
-# before(/.*\.js/) { content_type 'application/javascript' }
+not_found { redirect '/' }
 
 get '/' do
   @entries = all_entries

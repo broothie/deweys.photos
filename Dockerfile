@@ -2,6 +2,7 @@ FROM ruby:2.7.1
 
 WORKDIR /usr/src/app
 COPY puma.rb config.ru Gemfile Gemfile.lock server.rb ./
+COPY public public
 COPY views views
 
 RUN gem install bundler -v 2.1.4
