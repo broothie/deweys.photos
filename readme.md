@@ -12,3 +12,7 @@
 - [x] ~~Fix buttons on manage page~~
 - [ ] Improve mobile site
 - [ ] Add lightbox?
+
+## Attributions
+
+Icons made by https://www.flaticon.com/authors/freepik from www.flaticon.com.

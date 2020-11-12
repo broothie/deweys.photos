@@ -34,7 +34,7 @@ post '/photos' do
   # Validate fields
   [:title, :photo].each do |field|
     if params[field].nil? || params[field].empty?
-      halt 400, { error: "please add a #{field}" }.to_json
+      json 400, { error: "please add a #{field}" }
     end
   end
 
@@ -114,7 +114,26 @@ get '/style.css' do
 end
 
 helpers do
-  # Template
+  # Shorthands
+  def json(*args)
+    status = 200
+    headers = {}
+    case args.length
+    when 1
+      body = args.first
+    when 2
+      status, body = args
+    when 3
+      status, headers, body = args
+    else
+      # Let halt raise whatever error it normally would with the wrong number of args
+      return halt(*args)
+    end
+
+    headers.merge!('Content-Type' => 'application/json')
+    halt status, headers, body.to_json
+  end
+
   def title(title)
     @title = title
   end
